@@ -12,6 +12,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body class="bg-dark">
+        <h1>asdasdasdasd</h1>
         <?php
             require('db.php');
             session_start();
@@ -24,7 +25,7 @@
                 // Check user is exist in the database
                 $query    = "SELECT * FROM `patients` WHERE username='$username'
                             AND password='" . md5($password) . "'";
-                $result = mysqli_query($con, $query) or die(mysql_error());
+                $result = mysqli_query($con, $query) or die(mysqli_error($con));
                 $rows = mysqli_num_rows($result);
                 if ($rows == 1) {
                     $_SESSION['username'] = $username;
