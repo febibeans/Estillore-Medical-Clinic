@@ -72,20 +72,50 @@
                 <div>
                     <button type="button" class="btn btn-light float-right rounded-pill" data-bs-toggle="modal" data-bs-target="#staticBackdrop">+ Add Item</button>
                     <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade text-black" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Hatdog</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Understood</button>
-                            </div>
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">+ Add Item</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form" role="form" method="POST" action="add_item.php">
+                                        <input type="hidden" name="_token" value="">
+                                        <div class="form-group row">
+                                            <label class="col-md-3">Name</label>
+                                            <input type="text" class="col-md-8" name="name" placeholder="Enter Item Name">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3">Quantity</label>
+                                            <input type="number" class="col-md-8" name="quantity" placeholder="Enter Quantity">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3">Price</label>
+                                            <input type="number" class="col-md-8" name="price" placeholder="Enter Price">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-5">Manufacturing Date</label>
+                                            <input type="date" class="col-md-5" name="mnf_date" min="2020-01-01">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-5">Expiration Date</label>
+                                            <input type="date" class="col-md-5" name="exp_date" min="2023-01-01">
+                                        </div>
+                                        <div class="form-group row" >
+                                            <label class="col-md-4">Item Category</label>
+                                            <div class="col-md-8 text-black">
+                                                <input style="width:20px; height:20px;" type="radio" name="category" value="Medicine"> Medicine
+                                                <input style="width:20px; height:20px;" type="radio" name="category" value="Supply"> Supply
+                                                <input style="width:20px; height:20px;" type="radio" name="category" value="Vaccine"> Vaccine
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer float-right">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Add Item</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -18,6 +18,7 @@
 
             // When form submitted, insert values into the database.
             if (isset($_POST['username']) && isset($_POST['password'])==isset($_POST['repassword'])) {
+                $patient_id = "";
                 $name    = stripslashes($_POST['name']);
                 $name    = mysqli_real_escape_string($con, $name);
                 $username = stripslashes($_POST['username']);
@@ -30,15 +31,27 @@
                 $password = stripslashes($_POST['password']);
                 $password = mysqli_real_escape_string($con, $password);
                 $create_datetime = date("Y-m-d H:i:s");
-                $query    = "INSERT into patients (name, email, username, phone, age, dob, password, create_datetime)
-                    VALUES ('$name', '$email', '$username', '$phone', '$age', '$dob', '" . md5($password) . "', '$create_datetime')";
-                $result   = mysqli_query($con, $query);
-                if ($result) {
-                    echo '<script>
-                            alert("Registered Succesfully!");
-                            window.location.href="login.php";
-                        </script>';
-                }
+
+                $check = mysqli_query($con,"SELECT * FROM patients where name='$name' and email='$email' and username='$username'");
+                $checkrows = mysqli_num_rows($check);
+                if($checkrows>0){
+                    echo '
+                        <script>
+                            alert("An Account with this Email or Name already exists! Register again.");
+                            window.location.href="register.php";
+                        </script>
+                    ';
+                }else{
+                    $query    = "INSERT into patients (patient_id, name, email, username, phone, age, dob, password, create_datetime)
+                        VALUES ('$patient_id','$name', '$email', '$username', '$phone', '$age', '$dob', '" . md5($password) . "', '$create_datetime')";
+                    $result   = mysqli_query($con, $query);
+                    if ($result) {
+                        echo '<script>
+                                alert("Registered Succesfully!");
+                                window.location.href="login.php";
+                            </script>';
+                    }
+                }    
             } else {
         ?>
         <nav class="navbar navbar-expand-lg bg-black fixed-top" data-bs-theme="dark">

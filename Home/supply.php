@@ -48,7 +48,7 @@
                     ?>
 
                     <tr class="bg-dark text-white">
-                        <th class="thead-dark">SUPPLY ID</th>
+                        <th class="thead-dark" style="width:10%;">SUPPLY ID</th>
                         <th class="thead-dark">NAME</th>
                         <th class="thead-dark">QUANTITY</th>
                         <th class="thead-dark">PRICE</th>
