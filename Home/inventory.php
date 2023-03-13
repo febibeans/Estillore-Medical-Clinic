@@ -67,7 +67,7 @@
                 </div> <a href="logout.php" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
             </nav>
         </div>
-        <div class="bg-secondary" style="margin-left:80px; margin-top:69px; margin-bottom:20px;">
+        <div class="bg-secondary" style="margin-left:80px; margin-top:60px; margin-bottom:20px;">
             <div class="container bg-dark clearfix p-5 rounded-5">
                 <div>
                     <button type="button" class="btn btn-light float-right rounded-pill" data-bs-toggle="modal" data-bs-target="#staticBackdrop">+ Add Item</button>
@@ -130,40 +130,120 @@
         </div>
         <div class="bg-secondary" style="margin-left: 80px;">
             <div class="container bg-dark clearfix p-5 rounded-5">
-                <table class="table table-bordered table-striped table-light text-center" style="font-size:small;">
+                <table class="table table-bordered table-striped table-light text-center" style="font-size:small; height:200px; display:block; overflow-y:scroll; width:50%;">
+                <?php
+                    $localhost = "localhost";
+                    $root = "root";
+                    $password = "";
+                    $db = "profiles";
+                    $con = mysqli_connect($localhost, $root, $password, $db);
+                    if(mysqli_connect_errno()){
+                        echo"Failed to connect to MySQL: ".mysqli_connect_error();
+                    }
+                ?>
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Expiration Date</th>
+                            <th scope="col">Stocks</th>
+                            <th scope="col">Status</th>
                         </tr>
                     </thead>
+                    <?php
+                        $query = "
+                        SELECT vaccine_id, name, quantity, exp_date, 
+                        CASE
+                            WHEN exp_date=NOW() THEN 'Expired Today'
+                            WHEN exp_date<NOW() THEN 'Already Expired'
+                        END AS 'status',
+                        CASE
+                            WHEN quantity<=10 THEN 'Needs Restocking'
+                            WHEN quantity=1 THEN 'Out of Stock'
+                        END AS 'stocks'
+                        
+                        FROM vaccines WHERE vaccines.quantity<=10 AND exp_date<=NOW()";
+
+                        if($vaccine = $con->query($query)){
+
+                        }
+                    ?>
                     <tbody>
-                        <tr>
-                            <th scope="col">Mamamo</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                        </tr>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                        </tr>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                        </tr>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                        </tr>
+                    <?php
+                        while ($rows = $vaccine->fetch_assoc()) {
+                    ?>
+                    <tr class="bg-light">
+                        <td><?php echo $rows['name'];?></td>
+                        <td><?php echo $rows['quantity'];?></td>
+                        <td><?php echo $rows['exp_date'];?></td>
+                        <td><?php echo $rows['stocks'];?></td>
+                        <td><?php echo $rows['status'];?></td>
+                    </tr>
+                    <?php        
+                        }
+                    
+                        $query = "
+                        SELECT medicine_id, name, quantity, exp_date, 
+                        CASE
+                            WHEN exp_date=NOW() THEN 'Expired Today'
+                            WHEN exp_date<NOW() THEN 'Already Expired'
+                        END AS 'status',
+                        CASE
+                            WHEN quantity<=10 THEN 'Needs Restocking'
+                            WHEN quantity=1 THEN 'Out of Stock'
+                        END AS 'stocks'
+                        
+                        FROM medicines WHERE quantity<=10 AND exp_date<=NOW()";
+
+                        if($medicine = $con->query($query)){
+
+                        }
+                    ?>
+                    <tbody>
+                    <?php
+                        while ($rows = $medicine->fetch_assoc()) {
+                    ?>
+                    <tr class="bg-light">
+                        <td><?php echo $rows['name'];?></td>
+                        <td><?php echo $rows['quantity'];?></td>
+                        <td><?php echo $rows['exp_date'];?></td>
+                        <td><?php echo $rows['stocks'];?></td>
+                        <td><?php echo $rows['status'];?></td>
+                    </tr>
+                    <?php        
+                        }
+                    
+                        $query = "
+                        SELECT supply_id, name, quantity, exp_date, 
+                        CASE
+                            WHEN exp_date=NOW() THEN 'Expired Today'
+                            WHEN exp_date<NOW() THEN 'Already Expired'
+                        END AS 'status',
+                        CASE
+                            WHEN quantity<=10 THEN 'Needs Restocking'
+                            WHEN quantity=1 THEN 'Out of Stock'
+                        END AS 'stocks'
+                        
+                        FROM supplies WHERE quantity<=10 AND exp_date<=NOW()";
+
+                        if($supply = $con->query($query)){
+
+                        }
+                    ?>
+                    <tbody>
+                    <?php
+                        while ($rows = $supply->fetch_assoc()) {
+                    ?>
+                    <tr class="bg-light">
+                        <td><?php echo $rows['name'];?></td>
+                        <td><?php echo $rows['quantity'];?></td>
+                        <td><?php echo $rows['exp_date'];?></td>
+                        <td><?php echo $rows['stocks'];?></td>
+                        <td><?php echo $rows['status'];?></td>
+                    </tr>
+                    <?php        
+                        }
+                    ?>
                     </tbody>
                 </table>
             </div>

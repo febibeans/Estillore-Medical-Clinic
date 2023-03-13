@@ -29,7 +29,7 @@
         </header>
         <div class="bg-secondary">
             <div>
-                <table class="table sortable" id="dtBasicExample">
+                <table class="table">
                     <?php
                         $localhost = "localhost";
                         $root = "root";
