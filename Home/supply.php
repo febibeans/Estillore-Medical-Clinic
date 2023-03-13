@@ -40,7 +40,19 @@
                             echo"Failed to connect to MySQL: ".mysqli_connect_error();
                         }
 
-                        $query = "SELECT * FROM supplies";
+                        $query = "
+                        SELECT supplies.*,
+                        CASE
+                            WHEN exp_date=NOW() THEN 'Expiring Today'
+                            WHEN exp_date<NOW() THEN 'Good Condition'
+                            ELSE 'Expired'
+                        END AS 'status',
+                        CASE
+                            WHEN quantity=10 THEN 'Needs Restocking'
+                            WHEN quantity>10 THEN 'Good'
+                            ELSE 'Out of Stock'
+                        END AS 'stocks'
+                        FROM supplies;";
 
                         if($supply = $con->query($query)){
 
@@ -54,6 +66,8 @@
                         <th class="thead-dark">PRICE</th>
                         <th class="thead-dark">EXPIRATION DATE</th>
                         <th class="thead-dark">MANUFATURING DATE</th>
+                        <th class="thead-dark">STOCKS</th>
+                        <th class="thead-dark">STATUS</th>
                     </tr>
                     <?php
                         while ($rows = $supply->fetch_assoc()) {
@@ -65,6 +79,8 @@
                         <td><?php echo $rows['price'];?></td>
                         <td><?php echo $rows['exp_date'];?></td>
                         <td><?php echo $rows['mnf_date'];?></td>
+                        <td><?php echo $rows['stocks'];?></td>
+                        <td><?php echo $rows['status'];?></td>
                     </tr>
                     <?php        
                         }
