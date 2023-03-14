@@ -68,6 +68,7 @@
                         <th class="thead-dark">MANUFATURING DATE</th>
                         <th class="thead-dark">STOCKS</th>
                         <th class="thead-dark">STATUS</th>
+                        <th class="thead-dark" style="width:15%;">OPERATION</th>
                     </tr>
                     <?php
                         while ($rows = $supply->fetch_assoc()) {
@@ -81,6 +82,10 @@
                         <td><?php echo $rows['mnf_date'];?></td>
                         <td><?php echo $rows['stocks'];?></td>
                         <td><?php echo $rows['status'];?></td>
+                        <td>
+                            <button class="btn btn-primary"><a href="" class="text-light">Update</a></button>
+                            <button class="btn btn-warning"><a href="" class="text-light">Delete</a></button>
+                        </td>
                     </tr>
                     <?php        
                         }
