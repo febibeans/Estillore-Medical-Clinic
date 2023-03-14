@@ -17,7 +17,6 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
         <header class="header bg-black" id="header" style="opacity:; height: 69px;">
@@ -53,19 +52,20 @@
                             ELSE 'Out of Stock'
                         END AS 'stocks'
                         FROM medicines;";
-
+                        
+                        $category = 'medicine';
                         if($medicine = $con->query($query)){
 
                         }
                     ?>
 
                     <tr class="bg-dark text-white">
-                        <th class="thead-dark" style="width:10%;">MEDICINE ID</th>
-                        <th class="thead-dark">NAME</th>
-                        <th class="thead-dark">QUANTITY</th>
+                        <th class="thead-dark" style="width:5%;">ID</th>
+                        <th class="thead-dark" style="width:20%;">NAME</th>
+                        <th class="thead-dark" style="width:5%;">QUANTITY</th>
                         <th class="thead-dark">PRICE</th>
-                        <th class="thead-dark">EXPIRATION DATE</th>
-                        <th class="thead-dark">MANUFATURING DATE</th>
+                        <th class="thead-dark" style="width:10%;">EXPIRATION</th>
+                        <th class="thead-dark" style="width:10%;">MANUFATURED</th>
                         <th class="thead-dark">STOCKS</th>
                         <th class="thead-dark">STATUS</th>
                         <th class="thead-dark" style="width:15%;">OPERATION</th>
@@ -74,7 +74,7 @@
                         while ($rows = $medicine->fetch_assoc()) {
                     ?>
                     <tr class="bg-light">
-                        <td><?php echo $rows['medicine_id'];?></td>
+                        <td><?php echo $id=$rows['medicine_id'];?></td>
                         <td><?php echo $rows['name'];?></td>
                         <td><?php echo $rows['quantity'];?></td>
                         <td><?php echo $rows['price'];?></td>
@@ -82,10 +82,14 @@
                         <td><?php echo $rows['mnf_date'];?></td>
                         <td><?php echo $rows['stocks'];?></td>
                         <td><?php echo $rows['status'];?></td>
-                        <td>
-                            <button class="btn btn-primary"><a href="" class="text-light">Update</a></button>
-                            <button class="btn btn-warning"><a href="" class="text-light">Delete</a></button>
-                        </td>
+                        <?php
+                            echo '
+                            <td>
+                                <button class="btn btn-primary"><a href="update.php?updateid='.$id.'&category='.$category.'" class="text-light">Update</a></button>
+                                <button class="btn btn-danger"><a href="delete.php?deleteid='.$id.'&category='.$category.'" class="text-light">Delete</a></button>
+                            </td>
+                            ';
+                        ?>
                     </tr>
                     <?php        
                         }
@@ -93,5 +97,7 @@
                 </table>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
     </body>
 </html>

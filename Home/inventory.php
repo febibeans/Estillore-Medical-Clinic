@@ -130,7 +130,7 @@
         </div>
         <div class="bg-secondary" style="margin-left: 80px;">
             <div class="container bg-dark clearfix p-5 rounded-5">
-                <table class="table table-bordered table-striped table-light text-center" style="font-size:small; height:200px; display:block; overflow-y:scroll; width:50%;">
+                <table class="table table-bordered table-striped table-light text-center" style="font-size:small; height:200px; display:block; overflow-y:scroll;">
                 <?php
                     $localhost = "localhost";
                     $root = "root";
@@ -143,11 +143,14 @@
                 ?>
                     <thead>
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Expiration Date</th>
-                            <th scope="col">Stocks</th>
-                            <th scope="col">Status</th>
+                            <th scope="col" style="width:5%;">ID</th>
+                            <th scope="col" style="width:25%;">Name</th>
+                            <th scope="col" style="width:10%;">Quantity</th>
+                            <th scope="col" style="width:10%;">Expiry</th>
+                            <th scope="col" style="width:15%;">Stocks</th>
+                            <th scope="col" style="width:15%;">Status</th>
+                            <th scope="col" style="width:10%;">Category</th>
+                            <th class="thead-dark" style="width:10%;">Operation</th>
                         </tr>
                     </thead>
                     <?php
@@ -160,7 +163,10 @@
                         CASE
                             WHEN quantity<=10 THEN 'Needs Restocking'
                             WHEN quantity=1 THEN 'Out of Stock'
-                        END AS 'stocks'
+                        END AS 'stocks',
+                        CASE
+                            WHEN vaccine_id>0 THEN 'Vaccine'
+                        END AS 'category'
                         
                         FROM vaccines WHERE vaccines.quantity<=10 AND exp_date<=NOW()";
 
@@ -173,11 +179,20 @@
                         while ($rows = $vaccine->fetch_assoc()) {
                     ?>
                     <tr class="bg-light">
+                    <td><?php echo $id=$rows['vaccine_id'];?></td>
                         <td><?php echo $rows['name'];?></td>
                         <td><?php echo $rows['quantity'];?></td>
                         <td><?php echo $rows['exp_date'];?></td>
                         <td><?php echo $rows['stocks'];?></td>
                         <td><?php echo $rows['status'];?></td>
+                        <td><?php echo $category=$rows['category'];?></td>
+                        <?php
+                            echo '
+                                <td>
+                                    <button class="btn btn-primary"><a href="update.php?updateid='.$id.'&category='.$category.'" class="text-light">Update</a></button>
+                                </td>
+                            ';
+                        ?>
                     </tr>
                     <?php        
                         }
@@ -191,7 +206,10 @@
                         CASE
                             WHEN quantity<=10 THEN 'Needs Restocking'
                             WHEN quantity=1 THEN 'Out of Stock'
-                        END AS 'stocks'
+                        END AS 'stocks',
+                        CASE
+                            WHEN medicine_id>0 THEN 'Medicine'
+                        END AS 'category'
                         
                         FROM medicines WHERE quantity<=10 AND exp_date<=NOW()";
 
@@ -204,11 +222,20 @@
                         while ($rows = $medicine->fetch_assoc()) {
                     ?>
                     <tr class="bg-light">
+                    <td><?php echo $id=$rows['medicine_id'];?></td>
                         <td><?php echo $rows['name'];?></td>
                         <td><?php echo $rows['quantity'];?></td>
                         <td><?php echo $rows['exp_date'];?></td>
                         <td><?php echo $rows['stocks'];?></td>
                         <td><?php echo $rows['status'];?></td>
+                        <td><?php echo $category=$rows['category'];?></td>
+                        <?php
+                            echo '
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
+                                </td>
+                            ';
+                        ?>
                     </tr>
                     <?php        
                         }
@@ -222,7 +249,10 @@
                         CASE
                             WHEN quantity<=10 THEN 'Needs Restocking'
                             WHEN quantity=1 THEN 'Out of Stock'
-                        END AS 'stocks'
+                        END AS 'stocks',
+                        CASE
+                            WHEN supply_id>0 THEN 'Supply'
+                        END AS 'category'
                         
                         FROM supplies WHERE quantity<=10 AND exp_date<=NOW()";
 
@@ -235,11 +265,20 @@
                         while ($rows = $supply->fetch_assoc()) {
                     ?>
                     <tr class="bg-light">
+                        <td><?php echo $id=$rows['supply_id'];?></td>
                         <td><?php echo $rows['name'];?></td>
                         <td><?php echo $rows['quantity'];?></td>
                         <td><?php echo $rows['exp_date'];?></td>
                         <td><?php echo $rows['stocks'];?></td>
                         <td><?php echo $rows['status'];?></td>
+                        <td><?php echo $category=$rows['category'];?></td>
+                        <?php
+                            echo '
+                                <td>
+                                    <button class="btn btn-primary"><a href="update.php?updateid='.$id.'&category='.$category.'" class="text-light">Update</a></button>
+                                </td>
+                            ';
+                        ?>
                     </tr>
                     <?php        
                         }
