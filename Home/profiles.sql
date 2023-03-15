@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2023 at 02:23 PM
+-- Generation Time: Mar 15, 2023 at 02:43 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -41,15 +41,15 @@ CREATE TABLE `medicines` (
 --
 
 INSERT INTO `medicines` (`medicine_id`, `name`, `quantity`, `price`, `exp_date`, `mnf_date`) VALUES
-(1, 'Omeprazole', 100, '20.00', '2023-03-01', '2023-02-01'),
-(2, 'Gaviscon', 20, '100.00', '2023-03-01', '2023-02-01'),
-(3, 'Pre-natal Multi-vitamins', 30, '35.00', '2023-03-11', '2023-03-01'),
+(1, 'Omeprazole', 68, '98.00', '2023-04-14', '2023-02-03'),
+(2, 'Gaviscon', 78, '45.00', '2023-05-24', '2023-01-19'),
+(3, 'Pre-Natal Multi-Vitamins', 8, '65.00', '2023-05-24', '2023-02-10'),
 (4, 'Paracetamol Adults', 50, '50.00', '2023-03-07', '2023-03-03'),
 (5, 'Paracetamol Infants/Kids', 60, '20.00', '2023-03-17', '2023-01-05'),
 (6, 'Paracetamol Suppository', 23, '23.00', '2023-03-02', '2023-03-02'),
 (7, 'Amlodipine', 12, '12.00', '2023-03-25', '2023-03-22'),
 (8, 'Metformin', 34, '356.00', '2023-03-01', '2023-03-01'),
-(9, 'Catapres', 45, '450.00', '2023-03-24', '2023-03-15');
+(9, 'Catapres', 65, '35.00', '2023-01-31', '2023-05-06');
 
 -- --------------------------------------------------------
 
@@ -62,7 +62,7 @@ CREATE TABLE `patients` (
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
-  `phone` int(11) DEFAULT NULL,
+  `phone` bigint(20) DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
   `dob` date NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -74,8 +74,7 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`patient_id`, `name`, `email`, `username`, `phone`, `age`, `dob`, `password`, `create_datetime`) VALUES
-(1, 'Jem Angeles', 'jerremyandrewsangeles13@gmail.com', 'febibeans', 2147483647, 23, '1999-11-09', '202cb962ac59075b964b07152d234b70', '2023-02-25 17:48:47'),
-(2, 'Mamamo', 'mamamo@gmail.com', 'mamamoo', 23456789, 21, '2023-03-06', 'c4ca4238a0b923820dcc509a6f75849b', '2023-03-10 13:18:42');
+(1, 'Jem Angeles', 'jerremyandrewsangeles13@gmail.com', 'febibeans', 9972476026, 23, '1999-11-09', '202cb962ac59075b964b07152d234b70', '2023-02-25 17:48:47');
 
 -- --------------------------------------------------------
 
@@ -97,8 +96,8 @@ CREATE TABLE `supplies` (
 --
 
 INSERT INTO `supplies` (`supply_id`, `name`, `quantity`, `price`, `exp_date`, `mnf_date`) VALUES
-(1, 'Syringe', 5, '5.00', '2023-03-01', '2023-03-01'),
-(2, 'Blade', 5, '5.00', '2023-03-01', '2023-03-01'),
+(1, 'Syringe', 90, '5.00', '2023-07-20', '2022-11-01'),
+(2, 'Bade', 9, '67.00', '2023-03-31', '2023-03-01'),
 (3, 'Needle Silk', 1, '1.00', '2023-03-01', '2023-03-01'),
 (4, 'Gloves', 1, '1.00', '2023-01-01', '2023-01-01'),
 (5, 'Hair Cap', 1, '1.00', '2023-03-01', '2023-03-01'),
@@ -135,7 +134,7 @@ CREATE TABLE `vaccines` (
 INSERT INTO `vaccines` (`vaccine_id`, `name`, `quantity`, `price`, `exp_date`, `mnf_date`) VALUES
 (1, 'Flu Vaccine', 30, '1.00', '2023-03-01', '2023-03-01'),
 (2, 'Chicken Pox Vaccine', 30, '1.00', '2023-03-01', '2023-03-01'),
-(3, 'Pneumonia Vaccine', 1, '1.00', '2023-03-01', '2023-03-01'),
+(3, 'Pneumonia Vaccine', 76, '35.00', '2023-05-19', '2023-01-11'),
 (4, '6-in-1 Vaccine', 24, '24.00', '2023-03-03', '2023-03-03'),
 (5, '5-in-1 Vaccine ', 24, '24.00', '2023-03-04', '2023-03-04'),
 (6, 'Measles Vaccine', 35, '35.00', '2023-03-08', '2023-03-08'),
@@ -178,7 +177,7 @@ ALTER TABLE `vaccines`
 -- AUTO_INCREMENT for table `medicines`
 --
 ALTER TABLE `medicines`
-  MODIFY `medicine_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `medicine_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `patients`
@@ -190,7 +189,7 @@ ALTER TABLE `patients`
 -- AUTO_INCREMENT for table `supplies`
 --
 ALTER TABLE `supplies`
-  MODIFY `supply_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `supply_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `vaccines`

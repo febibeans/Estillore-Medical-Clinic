@@ -78,8 +78,8 @@
         $vaccine_id = "";
         $quantity = $_POST['quantity'];
         $price = $_POST['price'];
-        $mnf_date = date('Y-m-d', strtotime($_POST['mnf_date']));
         $exp_date = date('Y-m-d', strtotime($_POST['exp_date']));
+        $mnf_date = date('Y-m-d', strtotime($_POST['mnf_date']));
 
         //check whether the item is a duplicate
         $check = mysqli_query($con,"SELECT * FROM vaccines where name='$name'");

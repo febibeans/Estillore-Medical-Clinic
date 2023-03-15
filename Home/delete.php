@@ -2,6 +2,74 @@
 require("db.php");
 
 $id = $_GET['deleteid'];
+$category = $_GET['category'];
+
+if($category=='Medicine'){
+    if(isset($_GET['deleteid'])){
+        $id = $_GET['deleteid'];
+        $sql = "DELETE FROM medicines WHERE medicine_id=$id";
+        $result = mysqli_query($con, $sql);
+        if($result){
+            echo '
+                <script>
+                    alert("Item Deleted Successfully!");
+                    window.location.href="medicine.php";
+                </script>
+            ';
+        }else{
+            echo '
+                <script>
+                    alert("Something went WRONG!");
+                    window.location.href="medicine.php";
+                </script>
+            ';
+        }
+    }
+}elseif($category=='Supply'){
+    if(isset($_GET['deleteid'])){
+        $id = $_GET['deleteid'];
+        $sql = "DELETE FROM supplies WHERE supply_id=$id";
+        $result = mysqli_query($con, $sql);
+        if($result){
+            echo '
+                <script>
+                    alert("Item Deleted Successfully!");
+                    window.location.href="supply.php";
+                </script>
+            ';
+        }else{
+            echo '
+                <script>
+                    alert("Something went WRONG!");
+                    window.location.href="supply.php";
+                </script>
+            ';
+        }
+    }
+}elseif($category=='Vaccine'){
+    if(isset($_GET['deleteid'])){
+        $id = $_GET['deleteid'];
+        $sql = "DELETE FROM vaccines WHERE vaccine_id=$id";
+        $result = mysqli_query($con, $sql);
+        if($result){
+            echo '
+                <script>
+                    alert("Item Deleted Successfully!");
+                    window.location.href="vaccine.php";
+                </script>
+            ';
+        }else{
+            echo '
+                <script>
+                    alert("Something went WRONG!");
+                    window.location.href="vaccine.php";
+                </script>
+            ';
+        }
+    }
+}else{
+
+}
 
 ?>
 <!DOCTYPE html>

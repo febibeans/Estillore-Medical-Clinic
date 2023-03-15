@@ -95,12 +95,12 @@
                                             <input type="number" class="col-md-8" name="price" placeholder="Enter Price">
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-md-5">Manufacturing Date</label>
-                                            <input type="date" class="col-md-5" name="mnf_date" min="2020-01-01">
-                                        </div>
-                                        <div class="form-group row">
                                             <label class="col-md-5">Expiration Date</label>
                                             <input type="date" class="col-md-5" name="exp_date" min="2023-01-01">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-5">Manufacturing Date</label>
+                                            <input type="date" class="col-md-5" name="mnf_date" min="2020-01-01">
                                         </div>
                                         <div class="form-group row" >
                                             <label class="col-md-4">Item Category</label>
@@ -147,15 +147,16 @@
                             <th scope="col" style="width:25%;">Name</th>
                             <th scope="col" style="width:10%;">Quantity</th>
                             <th scope="col" style="width:10%;">Expiry</th>
-                            <th scope="col" style="width:15%;">Stocks</th>
-                            <th scope="col" style="width:15%;">Status</th>
+                            <th scope="col" style="width:10%;">Stocks</th>
+                            <th scope="col" style="width:10%;">Status</th>
                             <th scope="col" style="width:10%;">Category</th>
+                            <th scope="col" style="width:10%;">Price</th>
                             <th class="thead-dark" style="width:10%;">Operation</th>
                         </tr>
                     </thead>
                     <?php
                         $query = "
-                        SELECT vaccine_id, name, quantity, exp_date, 
+                        SELECT vaccine_id, name, quantity, price, exp_date, 
                         CASE
                             WHEN exp_date=NOW() THEN 'Expired Today'
                             WHEN exp_date<NOW() THEN 'Already Expired'
@@ -180,16 +181,17 @@
                     ?>
                     <tr class="bg-light">
                     <td><?php echo $id=$rows['vaccine_id'];?></td>
-                        <td><?php echo $rows['name'];?></td>
-                        <td><?php echo $rows['quantity'];?></td>
+                        <td><?php echo $name=$rows['name'];?></td>
+                        <td><?php echo $quantity=$rows['quantity'];?></td>
                         <td><?php echo $rows['exp_date'];?></td>
                         <td><?php echo $rows['stocks'];?></td>
                         <td><?php echo $rows['status'];?></td>
                         <td><?php echo $category=$rows['category'];?></td>
+                        <td><?php echo $price=$rows['price'];?></td>
                         <?php
                             echo '
                                 <td>
-                                    <button class="btn btn-primary"><a href="update.php?updateid='.$id.'&category='.$category.'" class="text-light">Update</a></button>
+                                    <button class="btn btn-primary"><a href="update.php?updateid='.$id.'&category='.$category.'&name='.$name.'&quantity='.$quantity.'&price='.$price.'" class="text-light">Update</a></button>
                                 </td>
                             ';
                         ?>
@@ -198,7 +200,7 @@
                         }
                     
                         $query = "
-                        SELECT medicine_id, name, quantity, exp_date, 
+                        SELECT medicine_id, name, quantity, price, exp_date, 
                         CASE
                             WHEN exp_date=NOW() THEN 'Expired Today'
                             WHEN exp_date<NOW() THEN 'Already Expired'
@@ -223,16 +225,17 @@
                     ?>
                     <tr class="bg-light">
                     <td><?php echo $id=$rows['medicine_id'];?></td>
-                        <td><?php echo $rows['name'];?></td>
-                        <td><?php echo $rows['quantity'];?></td>
+                        <td><?php echo $name=$rows['name'];?></td>
+                        <td><?php echo $quantity=$rows['quantity'];?></td>
                         <td><?php echo $rows['exp_date'];?></td>
                         <td><?php echo $rows['stocks'];?></td>
                         <td><?php echo $rows['status'];?></td>
                         <td><?php echo $category=$rows['category'];?></td>
+                        <td><?php echo $price=$rows['price'];?></td>
                         <?php
                             echo '
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
+                                    <button class="btn btn-primary"><a href="update.php?updateid='.$id.'&category='.$category.'&name='.$name.'&quantity='.$quantity.'&price='.$price.'" class="text-light">Update</a></button>
                                 </td>
                             ';
                         ?>
@@ -241,7 +244,7 @@
                         }
                     
                         $query = "
-                        SELECT supply_id, name, quantity, exp_date, 
+                        SELECT supply_id, name, quantity, price, exp_date, 
                         CASE
                             WHEN exp_date=NOW() THEN 'Expired Today'
                             WHEN exp_date<NOW() THEN 'Already Expired'
@@ -266,16 +269,17 @@
                     ?>
                     <tr class="bg-light">
                         <td><?php echo $id=$rows['supply_id'];?></td>
-                        <td><?php echo $rows['name'];?></td>
-                        <td><?php echo $rows['quantity'];?></td>
+                        <td><?php echo $name=$rows['name'];?></td>
+                        <td><?php echo $quantity=$rows['quantity'];?></td>
                         <td><?php echo $rows['exp_date'];?></td>
                         <td><?php echo $rows['stocks'];?></td>
                         <td><?php echo $rows['status'];?></td>
                         <td><?php echo $category=$rows['category'];?></td>
+                        <td><?php echo $price=$rows['price'];?></td>
                         <?php
                             echo '
                                 <td>
-                                    <button class="btn btn-primary"><a href="update.php?updateid='.$id.'&category='.$category.'" class="text-light">Update</a></button>
+                                    <button class="btn btn-primary"><a href="update.php?updateid='.$id.'&category='.$category.'&name='.$name.'&quantity='.$quantity.'&price='.$price.'" class="text-light">Update</a></button>
                                 </td>
                             ';
                         ?>

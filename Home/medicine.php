@@ -53,7 +53,7 @@
                         END AS 'stocks'
                         FROM medicines;";
                         
-                        $category = 'medicine';
+                        $category = 'Medicine';
                         if($medicine = $con->query($query)){
 
                         }
@@ -75,9 +75,9 @@
                     ?>
                     <tr class="bg-light">
                         <td><?php echo $id=$rows['medicine_id'];?></td>
-                        <td><?php echo $rows['name'];?></td>
-                        <td><?php echo $rows['quantity'];?></td>
-                        <td><?php echo $rows['price'];?></td>
+                        <td><?php echo $name=$rows['name'];?></td>
+                        <td><?php echo $quantity=$rows['quantity'];?></td>
+                        <td><?php echo $price=$rows['price'];?></td>
                         <td><?php echo $rows['exp_date'];?></td>
                         <td><?php echo $rows['mnf_date'];?></td>
                         <td><?php echo $rows['stocks'];?></td>
@@ -85,7 +85,7 @@
                         <?php
                             echo '
                             <td>
-                                <button class="btn btn-primary"><a href="update.php?updateid='.$id.'&category='.$category.'" class="text-light">Update</a></button>
+                                <button class="btn btn-primary"><a href="update.php?updateid='.$id.'&category='.$category.'&name='.$name.'&quantity='.$quantity.'&price='.$price.'" class="text-light">Update</a></button>
                                 <button class="btn btn-danger"><a href="delete.php?deleteid='.$id.'&category='.$category.'" class="text-light">Delete</a></button>
                             </td>
                             ';
